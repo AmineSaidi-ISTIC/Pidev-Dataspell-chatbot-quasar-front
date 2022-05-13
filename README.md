@@ -1,6 +1,6 @@
 #   Quasar App (dataspellchatbot)
 
-A Quasar Project
+DataSpell project
 
 ## Install the dependencies
 ```bash
