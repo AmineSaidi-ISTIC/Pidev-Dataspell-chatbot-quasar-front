@@ -1,0 +1,7 @@
+{
+  "appId": "com.dataspell.tn",
+  "appName": "Quasar App",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}
