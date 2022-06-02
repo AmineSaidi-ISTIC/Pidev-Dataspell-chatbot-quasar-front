@@ -11,9 +11,14 @@
           dense
           label="Back" />
 
-        <q-toolbar-title class="absolute-center">
+        <q-toolbar-title class="">
           {{ title }}
         </q-toolbar-title>
+
+
+        <!-- <q-page class="row items-center justify-evenly">
+          <q-btn @click="toggleDarkMode">Toggle dark mode</q-btn>
+        </q-page> -->
 
         <q-btn
           to="/"
@@ -36,12 +41,13 @@
 <script>
 import { openURL } from 'quasar'
 
+
 export default {
   computed: {
     title() {
       console.log(this.$route)
       let currentPath = this.$route.fullPath
-      if (currentPath == '/home') return 'DataSpell Home Page'
+      if (currentPath == '/home') return 'DataSpell'
       else if (currentPath == '/chat') return 'Chat'
       else if (currentPath == '/') return 'Login'
     }
@@ -51,6 +57,8 @@ export default {
   }
 }
 </script>
-
 <style>
+body.body--dark {
+  background: #333333;
+}
 </style>

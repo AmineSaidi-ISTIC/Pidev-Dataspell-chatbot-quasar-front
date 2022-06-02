@@ -33,37 +33,41 @@
 
   	</q-list>
 
+<div class="mt-40">
+	<q-chart 
+	identifier="myChart1"
+	stilo="height:28vh; width: 100%"
+		type="bar"  
+		:datasets="datasets"
+		:options="options"
+		:labels="labels"
 
-<q-chart 
-  identifier="myChart1"
-  stilo="height:25vh; width: 60%"
- 	type="bar"  
-	 :datasets="datasets"
-	 :options="options"
-	   :labels="labels"
+	/>
+</div>
 
-/>
-
+<div class="mt-40">
 <q-chart 
   identifier="myChart2"
-  stilo="height:25vh; width: 60%"
+	stilo="height:28vh; width: 100%"
  	type="bubble"  
 	 :datasets="datasets1"
 	 :options="options1"
 	   :labels="labels1"
 
 /> 
+</div>
 
-
+<div class="mt-40">
 <q-chart 
   identifier="myChart3"
-  stilo="height:25vh; width: 60%"
+	stilo="height:28vh; width: 100%"
  	type="polarArea"  
 	 :datasets="datasets2"
 	 :options="options2"
 	   :labels="labels2"
 
 />
+</div>
 
   </q-page>
 </template>
@@ -93,14 +97,14 @@ import QChart from 'quasar-components-chart'
 		{
 			data: [2,1,0,-5,-6.5,6,2],
 			label: 'Banking Chatbot',
-			borderColor: "#2424",
-     		 backgroundColor:  "#2424",
+			borderColor: "#ec1c24",
+     		 backgroundColor:  "#ec1c24",
 		}, 
 		{
 		  	data: [2, 7,1,2,3,4,-3],
 			label: 'Entertainment ChatBot',
-			borderColor: "#666",
-     		 backgroundColor:  "#666",
+			borderColor: "#EA6124",
+     		 backgroundColor:  "#EA6124",
 		}, 
 		],
 		
@@ -130,8 +134,8 @@ import QChart from 'quasar-components-chart'
 				r: 10
 				}],
 			label: 'Banking Chatbot',
-			borderColor: "#2424",
-     		 backgroundColor:  "#2424",
+			borderColor: "#282566",
+     		 backgroundColor:  "#282566",
 		}, 
 		{
 		  	data: [{
@@ -144,8 +148,8 @@ import QChart from 'quasar-components-chart'
 				r: 7
 				}],
 			label: 'Entertainment ChatBot',
-			borderColor: "#666",
-     		 backgroundColor:  "#666",
+			borderColor: "#4b318f",
+     		 backgroundColor:  "#4b318f",
 		}, 
 		],
 
@@ -167,26 +171,23 @@ import QChart from 'quasar-components-chart'
 			},
 		datasets2: [
 		{
-			data: [11, 16, 7, 3, 14],
+			data: [11, 16, 7, 3],
 			label: 'Banking Chatbot',
 			borderColor: "#2424",
      		backgroundColor: [
-      'rgb(255, 99, 132)',
-      'rgb(75, 192, 192)',
-      'rgb(255, 205, 86)',
-      'rgb(201, 203, 207)',
-      'rgb(54, 162, 235)'
-    ]
+      '#ec1c24',
+      '#EA6124',
+      '#282566',
+      '#4b318f'    ]
 		}, 
 		{
-		  	data: [11, 16, 7, 3, 14 ],
+		  	data: [11, 16, 7, 3 ],
 			label: 'Entertainment ChatBot',
 			backgroundColor: [
-      'rgb(255, 99, 132)',
-      'rgb(75, 192, 192)',
-      'rgb(255, 205, 86)',
-      'rgb(201, 203, 207)',
-      'rgb(54, 162, 235)'
+     '#ec1c24',
+      '#EA6124',
+      '#282566',
+      '#4b318f' 
     ]
 		}, 
 		],

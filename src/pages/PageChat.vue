@@ -77,13 +77,13 @@
 
                 <q-item clickable v-close-popup>
                   <q-item-section avatar>
-                    <q-fab-action color="primary" :text-color="MicColor" @click="captureAudio" icon="mic" label="voice message" style="position: fixed "/>
+                    <q-fab-action color="primary" :text-color="MicColor" @click="captureAudio" icon="mic" label="" style="position: fixed "/>
 
                   </q-item-section>
                 </q-item>
                 <q-item clickable v-close-popup>
                   <q-item-section avatar>
-                    <q-file color="grey-3" bg-color="blue" outlined label-color="white" v-model="files" label="Label" counter max-files="12" @click="pickImage" style="position: fixed;max-width: 16%  ">
+                    <q-file color="primary" bg-color="primary" outlined label-color="white" v-model="files" label="" counter max-files="12" @click="pickImage" style="position: fixed;max-width: 16%  ">
                       <template v-slot:append>
                         <q-icon name="attachment" color="white" />
                       </template>
@@ -92,7 +92,7 @@
                 </q-item>
                 <q-item clickable v-close-popup>
                   <q-item-section avatar>
-                    <q-fab-action color="primary"  @click="sendFile" icon="send" label="send File" style="position: fixed "/>
+                    <q-fab-action color="primary"  @click="sendFile" icon="send" label="" style="position: fixed "/>
 
                   </q-item-section>
                 </q-item>
