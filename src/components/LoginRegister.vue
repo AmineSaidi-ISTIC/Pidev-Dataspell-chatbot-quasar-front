@@ -63,7 +63,7 @@
         const login = new Promise((resolve, reject) => {
             axios
               .post(
-                "http://192.168.1.20:8900/api/login",
+                "http://192.168.1.19:8900/api/login",
                 this.formData
               )
               .then(response => {

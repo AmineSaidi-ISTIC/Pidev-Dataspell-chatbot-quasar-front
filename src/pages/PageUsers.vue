@@ -32,11 +32,14 @@
   	  </q-item>
 
   	</q-list>
+
   </q-page>
 </template>
 
 <script>
-	export default {
+ // import PieChart from "../components";
+
+  export default {
 	  data () {
 	    return {
 	      users: [{
