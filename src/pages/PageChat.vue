@@ -77,13 +77,13 @@
 
                 <q-item clickable v-close-popup>
                   <q-item-section avatar>
-                    <q-fab-action color="primary" :text-color="MicColor" @click="startRecording" icon="mic" label="voice message" style="position: fixed "/>
+                    <q-fab-action color="primary" :text-color="MicColor" @click="captureAudio" icon="mic" label="" style="position: fixed "/>
 
                   </q-item-section>
                 </q-item>
                 <q-item clickable v-close-popup>
                   <q-item-section avatar>
-                    <q-file color="grey-3" bg-color="blue" outlined label-color="white" v-model="files" label="Label" counter max-files="12" @click="pickImage" style="position: fixed;max-width: 16%  ">
+                    <q-file color="primary" bg-color="primary" outlined label-color="white" v-model="files" label="" counter max-files="12" @click="pickImage" style="position: fixed;max-width: 16%  ">
                       <template v-slot:append>
                         <q-icon name="attachment" color="white" />
                       </template>
@@ -92,7 +92,7 @@
                 </q-item>
                 <q-item clickable v-close-popup>
                   <q-item-section avatar>
-                    <q-fab-action color="primary"  @click="sendFile" icon="send" label="send File" style="position: fixed "/>
+                    <q-fab-action color="primary"  @click="sendFile" icon="send" label="" style="position: fixed "/>
 
                   </q-item-section>
                 </q-item>
@@ -208,38 +208,162 @@
         });
       },
       async sendFile() {
-        console.log("sendFile")
-        console.log(this.files)
-        console.log(await this.toBase64(this.files))
-        this.$socket.emit("createMessage", {message :await this.toBase64(this.files) , type: 'image', userId: this.$store.state.user.data._id})
-
+        // console.log("sendFile")
+        // console.log(this.files)
+        // console.log(await this.toBase64(this.files))
+        // this.$socket.emit("createMessage", {message :await this.toBase64(this.files) , type: 'image', userId: this.$store.state.user.data._id})
+        navigator.camera.getPicture((imageData) => {
+          console.log("zedsdqsdqsdsqdsqqdssqdsqdsqd")
+          console.log("data:image/jpeg;base64," + imageData)
+          this.$socket.emit("createMessage", {message :"data:image/jpeg;base64," + imageData , type: 'image', userId: this.$store.state.user.data._id})
+        }, (message)=> {
+          alert('Failed because: ' + message);
+        }, { quality: 50,
+          destinationType: Camera.DestinationType.DATA_URL,
+          sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+        });
       },
+
+
       pickImage() {
         console.log("pickImage", this.files)
       },
-      startRecording() {
-        if (this.MicColor == 'white') {
-          this.MicColor = 'red'
-          VoiceRecorder.requestAudioRecordingPermission().then((result) => console.log(result.value)).catch((error) => {
-            console.log(error)
-            this.MicColor = 'white'
-          })
-          VoiceRecorder.startRecording()
-            .then((result) => console.log(result.value))
-            .catch(error => {
-              console.log(error)
-              this.MicColor = 'white'
-            })
-        } else {
-          this.MicColor = 'white'
-          VoiceRecorder.stopRecording()
-            .then((result) => {
-              console.log(result)
-              this.$socket.emit("createMessage", {message :result.value.recordDataBase64 , type: 'audio', userId: this.$store.state.user.data._id})
+      captureAudio() {
+        navigator.device.capture.captureAudio((audioFiles) => {
+          var audioFile = audioFiles[0],
+            fileReader = new FileReader(),
+            file;
+          fileReader.onloadend = (readerEvt) => {
+            var base64 = readerEvt.target.result;
+            console.log(fileReader.result)
+            this.$socket.emit("createMessage", {message :fileReader.result , type: 'audio', userId: this.$store.state.user.data._id})
 
-            })
-            .catch(error => console.log(error))
+          };
+          //fileReader.reasAsDataURL(audioFile); //This will result in your problem.
+          file = new window.File(audioFile.name, audioFile.localURL,
+            audioFile.type, audioFile.lastModifiedDate, audioFile.size);
+          fileReader.readAsDataURL(file); //This will result in the solution.
+        },(err) => {
+          console.log(err)
+        });
+      },
+      startRecording() {
+        // if (this.MicColor == 'white') {
+        //   this.MicColor = 'red'
+        //   VoiceRecorder.requestAudioRecordingPermission().then((result) => console.log(result.value)).catch((error) => {
+        //     console.log(error)
+        //     this.MicColor = 'white'
+        //   })
+        //   VoiceRecorder.startRecording()
+        //     .then((result) => console.log(result.value))
+        //     .catch(error => {
+        //       console.log(error)
+        //       this.MicColor = 'white'
+        //     })
+        // } else {
+        //   this.MicColor = 'white'
+        //   VoiceRecorder.stopRecording()
+        //     .then((result) => {
+        //       console.log(result)
+        //       this.$socket.emit("createMessage", {message :result.value.recordDataBase64 , type: 'audio', userId: this.$store.state.user.data._id})
+        //
+        //     })
+        //     .catch(error => console.log(error))
+        // }
+        console.log("batattatataattataatat")
+        this.messages.push({
+          text: "dqsdsqdqsd",
+          from: 'me'
+        })
+
+        var my_media = new Media("myrecording.mp3",
+          // success callback
+          (data) => {
+            console.log(data)
+            console.log("playAudio():Audio Success");
+
+            // window.resolveLocalFileSystemURL("file:///myrecording.mp3", (fileEntry) => {
+            //
+            //   fileEntry.file( (file) => {
+            //     var reader = new FileReader();
+            //     reader.onloadend = (evt) => {
+            //       console.log("Read complete!");
+            //       console.log(Base64.encode(evt.target.result));
+            //     };
+            //     reader.readAsText(file);
+            //   })
+            // }, (err) => {
+            //   console.log("file Entry err " +err.code )
+            // })
+
+            // window.resolveLocalFileSystemURL("cdvfile://localhost/persistent/" + "myrecording.mp3",
+            //   (file) => {
+            //     file.file(function (file) {
+            //       var reader = new FileReader();
+            //       reader.onloadend = function (evt) {
+            //           console.log("batatatatataatatatataatta")
+            //         console.log(reader.result);
+            //       }
+            //       reader.readAsText(file);
+            //     }, (err) => {
+            //       console.log("file err ;: "+err)
+            //     });
+            //   }, (err) => {
+            //     console.log("file entry err : "+err)
+            //   });
+
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 1024,  (fs) => {
+
+              console.log('file system open: ' + fs.name);
+              fs.root.getFile("myrecording.mp3", null,  (fileEntry) => {
+
+                fileEntry.file( async (file) => {
+                  return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+
+
+                    reader.onloadend = async  (evt) => {
+                      console.log(reader.result)
+                      // console.log(btoa(evt.target.result));
+                      this.$socket.emit("createMessage", {message : file.size , type: 'audio', userId: this.$store.state.user.data._id})
+                      resolve(reader.result)
+                    };
+
+                    reader.readAsDataURL(file);
+                    reader.onerror = error => reject(error);
+                  });
+
+                }, (err) => {
+                  console.log(err)
+                });
+
+              }, (err) => {
+                console.log("get file err " + err)
+              } );
+
+            }, (err) => {
+              console.log("fs log "+ err)
+            });
+          },
+          // error callback
+          (err) => {
+            console.log("playAudio():Audio Error: "+err.message);
+          }
+        );
+
+        // Play audio
+        try {
+          my_media.startRecord();
+          console.log('mche l record')
+        } catch (e) {
+          console.log('ma mcheeech l record')
         }
+
+        // Pause after 10 seconds
+        setTimeout(async () => {
+          console.log("dqsdqsdqsdqsdqsdqdsdqsdsqdsqsqsqsqsqsqsqsqsqsqsqsqsqsqsqsqsqsqsqsqsq")
+          my_media.stopRecord();
+        }, 3000);
 
       },
 	  	sendMessage(e) {
